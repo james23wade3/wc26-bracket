@@ -45,7 +45,8 @@
     ["Round of 32","16 matches"],["Round of 16","8 matches"],
     ["Quarter-finals","Final 8"],["Semi-finals","Final 4"],["Final","MetLife"]
   ];
+  const ROUND_SHORT = ["R32","R16","QF","SF","Final"];
   const ROUND_WEIGHTS = [1, 2, 4, 8, 16]; // R32 -> Final
   const CHAMP = "m104";
-  return { T:T, R0:R0, KIDS:KIDS, COLS:COLS, ROUND_LABELS:ROUND_LABELS, ROUND_WEIGHTS:ROUND_WEIGHTS, CHAMP:CHAMP };
+  return { T:T, R0:R0, KIDS:KIDS, COLS:COLS, ROUND_LABELS:ROUND_LABELS, ROUND_SHORT:ROUND_SHORT, ROUND_WEIGHTS:ROUND_WEIGHTS, CHAMP:CHAMP };
 });
