@@ -140,7 +140,89 @@
   .scard .tb{font-size:10px;color:rgba(246,244,236,.5);margin-top:3px}
   .admin .fg{display:flex;gap:8px;align-items:center;margin:10px 0 2px;font-size:12.5px;flex-wrap:wrap}
   .admin .fg input{width:70px;font-family:var(--body);font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid var(--pitch-line);background:rgba(0,0,0,.25);color:var(--chalk)}
-  @media (max-width:640px){ .bracket{gap:30px} .round{min-width:204px} }
+
+  /* lock-in */
+  .lockbox{display:inline-flex;align-items:center;gap:8px}
+  .lockbtn{font-family:var(--body);font-weight:700;font-size:12.5px;border-radius:8px;padding:8px 14px;cursor:pointer;border:1px solid var(--pitch-line);transition:.15s}
+  .lockbtn.lock{background:var(--gold);color:#241a00;border-color:var(--gold-deep)}
+  .lockbtn.lock:hover{background:var(--gold-deep)}
+  .lockbtn.unlock{background:rgba(246,244,236,.08);color:var(--chalk)}
+  .lockbtn.unlock:hover{background:rgba(226,85,46,.22);border-color:var(--andrew)}
+  .lockstate{font-size:11.5px;color:rgba(246,244,236,.7)}
+  .lockstate b{color:var(--gold)}
+  .scard .lockchip{font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-top:3px}
+  .scard .ceil{font-size:10px;color:rgba(246,244,236,.55);margin-top:2px}
+  .scard .ceil b{color:var(--gold);font-weight:800}
+  .decided .clinch{display:block;margin-top:5px;color:var(--gold);font-weight:800;font-size:11.5px}
+  .h2h tr.ceil td{color:rgba(246,244,236,.6)} .h2h tr.ceil td.a,.h2h tr.ceil td.s{color:var(--gold);font-weight:800}
+
+  /* champion spotlight */
+  .champ{display:flex;gap:10px;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:14px auto 0;max-width:700px}
+  .champ .cc{flex:1;min-width:150px;background:rgba(0,0,0,.2);border:1px solid var(--pitch-line);border-radius:12px;padding:10px 14px;text-align:center}
+  .champ .cc.andrew{border-color:rgba(226,85,46,.5)} .champ .cc.sam{border-color:rgba(46,143,192,.5)}
+  .champ .cc.actual{border-color:var(--gold-deep);background:linear-gradient(180deg,rgba(232,184,75,.18),rgba(0,0,0,.12))}
+  .champ .cc .lab{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:5px;color:rgba(246,244,236,.65)}
+  .champ .cc.andrew .lab{color:var(--andrew)} .champ .cc.sam .lab{color:var(--sam)} .champ .cc.actual .lab{color:var(--gold)}
+  .champ .cc .pk{display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--disp);font-size:21px;line-height:1;text-transform:uppercase;color:var(--chalk)}
+  .champ .cc .pk .fl{font-size:25px}
+  .champ .cc .pk.tbd{font-family:var(--body);font-size:13px;font-weight:600;color:rgba(246,244,236,.45);font-style:italic;text-transform:none}
+  .champ .cc .hit{font-size:10.5px;font-weight:800;margin-top:4px}
+  .champ .cc .hit.y{color:var(--green)} .champ .cc .hit.n{color:var(--red)}
+
+  /* golden boot */
+  .golden{margin:14px auto 0;max-width:700px;background:rgba(0,0,0,.22);border:1px solid rgba(232,184,75,.4);border-radius:14px;padding:14px 16px}
+  .golden h3{margin:0 0 10px;font-family:var(--disp);font-size:16px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold)}
+  .golden .picks{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .golden .gp{flex:1;min-width:160px;background:rgba(0,0,0,.2);border:1px solid var(--pitch-line);border-radius:10px;padding:8px 12px}
+  .golden .gp.andrew{border-color:rgba(226,85,46,.5)} .golden .gp.sam{border-color:rgba(46,143,192,.5)}
+  .golden .gp .lab{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-bottom:4px}
+  .golden .gp.andrew .lab{color:var(--andrew)} .golden .gp.sam .lab{color:var(--sam)}
+  .golden .gp .val{font-weight:700;font-size:14px}
+  .golden .gp .val.tbd{color:rgba(246,244,236,.45);font-weight:500;font-style:italic}
+  .golden .gp .val .hit{font-weight:800;margin-left:6px} .golden .gp .val .hit.y{color:var(--green)}
+  .golden input{width:100%;font-family:var(--body);font-size:13px;padding:7px 9px;border-radius:8px;border:1px solid var(--pitch-line);background:rgba(0,0,0,.28);color:var(--chalk)}
+  .golden .gp input{margin-top:3px}
+  .golden .board{border-top:1px solid var(--pitch-line);padding-top:9px}
+  .golden .board .bt{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(246,244,236,.6);margin-bottom:6px;font-weight:700}
+  .golden .board ol{margin:0;padding:0;list-style:none}
+  .golden .board li{display:flex;align-items:center;gap:9px;font-size:13.5px;padding:3px 0}
+  .golden .board li .rk{width:16px;font-family:var(--disp);color:var(--gold);text-align:center}
+  .golden .board li .gn{flex:1;font-weight:600}
+  .golden .board li .gg{font-weight:800;color:var(--gold)}
+  .golden .empty{font-size:12px;color:rgba(246,244,236,.5);font-style:italic}
+
+  /* head-to-head dashboard */
+  .h2h{margin:4px 0 14px;display:grid;gap:12px;grid-template-columns:1fr 1fr}
+  .h2h .panel{background:rgba(0,0,0,.22);border:1px solid var(--pitch-line);border-radius:12px;padding:12px 14px;min-width:0}
+  .h2h .panel.wide{grid-column:1/-1}
+  .h2h h4{margin:0 0 8px;font-family:var(--disp);font-size:14px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold)}
+  .h2h table{width:100%;border-collapse:collapse;font-size:12.5px}
+  .h2h th,.h2h td{padding:5px 6px;text-align:center}
+  .h2h th{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(246,244,236,.55);font-weight:700}
+  .h2h td.rd{text-align:left;color:rgba(246,244,236,.82);font-weight:600}
+  .h2h td.a{color:var(--andrew);font-weight:800} .h2h td.s{color:var(--sam);font-weight:800}
+  .h2h tr.win-a td.a,.h2h tr.win-s td.s{background:rgba(232,184,75,.16);border-radius:5px}
+  .h2h tr.tot td{border-top:1px solid var(--pitch-line);font-size:14px}
+  .h2h .swing{list-style:none;margin:0;padding:0}
+  .h2h .swing li{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--pitch-line)}
+  .h2h .swing li:first-child{border-top:0}
+  .h2h .swing .rb{font-size:9.5px;font-weight:800;letter-spacing:.06em;color:var(--gold);min-width:30px}
+  .h2h .swing .vs{flex:1;display:flex;flex-direction:column;gap:1px;min-width:0;font-size:12.5px}
+  .h2h .swing .vs span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .h2h .swing .pa{color:var(--andrew);font-weight:700} .h2h .swing .ps{color:var(--sam);font-weight:700}
+  .h2h .swing .pts{font-family:var(--disp);font-size:19px;color:var(--gold)}
+  .h2h .feed{list-style:none;margin:0;padding:0;max-height:300px;overflow:auto}
+  .h2h .feed li{display:flex;align-items:center;gap:9px;padding:6px 0;border-top:1px solid var(--pitch-line);font-size:12.5px}
+  .h2h .feed li:first-child{border-top:0}
+  .h2h .feed .res{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .h2h .feed .res b{color:var(--chalk)}
+  .h2h .feed .rb{font-size:9.5px;font-weight:800;color:var(--gold);min-width:30px}
+  .h2h .feed .who2{display:flex;gap:5px;flex:none}
+  .h2h .feed .tag{font-size:10px;font-weight:800;border-radius:4px;padding:2px 6px;color:#fff}
+  .h2h .feed .tag.a{background:var(--andrew)} .h2h .feed .tag.s{background:var(--sam)}
+  .h2h .feed .tag.miss{opacity:.38}
+  .h2h .none{font-size:12px;color:rgba(246,244,236,.5);font-style:italic;padding:4px 0}
+
+  @media (max-width:640px){ .bracket{gap:30px} .round{min-width:204px} .h2h{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -153,6 +235,7 @@
 
   <div id="poolBanner"></div>
   <div class="scoreboard" id="scoreboard"></div>
+  <div class="champ" id="champ"></div>
 
   <div class="controls">
     <div class="seg" id="seg">
@@ -163,22 +246,26 @@
     <div class="meta-row">
       <div class="progress" id="progressBox"><span id="progressLabel">—</span><span class="bar"><i id="progressBar"></i></span></div>
       <span class="savechip" id="saveChip"></span>
+      <span class="lockbox" id="lockBox"></span>
       <button class="btn" id="shareBtn">Copy link for Sam</button>
+      <button class="btn" id="goldenBtn">⚽ Golden Boot</button>
       <button class="btn danger" id="clearBtn">Clear mine</button>
       <button class="btn" id="adminBtn">Results</button>
     </div>
   </div>
   <div class="tiebreak" id="tiebreakBox"></div>
 
+  <div id="goldenPanel"></div>
   <div id="adminPanel"></div>
 
   <div class="rtabs" id="rtabs"></div>
+  <div id="h2h"></div>
   <div class="bracket-wrap" id="bracketWrap">
     <div class="bracket" id="bracket"><svg class="links" id="links" xmlns="http://www.w3.org/2000/svg"></svg></div>
   </div>
 
   <div class="footnote">
-    Final: <b>Sunday, July 19</b> · MetLife Stadium, East Rutherford, NJ &nbsp;·&nbsp; Picks lock per match once it's decided.<br>
+    Final: <b>Sunday, July 19</b> · MetLife Stadium, East Rutherford, NJ &nbsp;·&nbsp; Pick every match, then <b>Lock in</b> your bracket for the tournament.<br>
     Scoring: R32 <b>1</b> · R16 <b>2</b> · QF <b>4</b> · SF <b>8</b> · Final <b>16</b> per correct winner. Results update automatically.
   </div>
 </div>
@@ -201,7 +288,28 @@ let localTB={andrew:null,sam:null};
 let editCode=localStorage.getItem("wc_edit")||"";
 let adminCode=localStorage.getItem("wc_admin")||"";
 let adminOpen=false;
+let goldenOpen=false;
 const clone=o=>JSON.parse(JSON.stringify(o||{}));
+const isLocked=p=>!!(S&&S.locked&&S.locked[p]);
+// Teams knocked out in reality (lost a decided match they really played in).
+function eliminatedTeams(){
+  const elim=new Set();
+  for(const id of ALL){ const w=S.actuals[id]; if(!w) continue;
+    const [x,y]=realParticipants(id,S.actuals);
+    if(x&&x!==w) elim.add(x); if(y&&y!==w) elim.add(y); }
+  return elim;
+}
+// Best score a player can still finish on: points banked + every undecided
+// match whose picked team is still alive (a fixed bracket means an alive pick
+// is still on a path that can win that match).
+function ceilingFor(player,elim){
+  elim=elim||eliminatedTeams();
+  let m=S.scores[player].points;
+  for(const id of ALL){ if(S.actuals[id]) continue;
+    const p=S.picks[player][id]; if(p&&!elim.has(p)) m+=S.weights[roundOf[id]]; }
+  return m;
+}
+function escapeHtml(s){ return String(s==null?"":s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 // ---------- data ----------
 async function getState(){
@@ -213,7 +321,7 @@ async function getState(){
 }
 function feeders(player,id){ if(fixed[id]) return fixed[id].slice(); const[a,b]=KIDS[id]; return[local[player][a]||null,local[player][b]||null]; }
 function setPick(player,id,team){
-  if(S.actuals[id]) return; // locked, decided
+  if(isLocked(player)){ toast(nameOf(player)+"'s bracket is locked"); return; }
   local[player][id]=team;
   let cur=id;
   while(parent[cur]){ const p=parent[cur]; const fs=feeders(player,p);
@@ -226,6 +334,7 @@ async function savePicks(player){
     const r=await fetch("/api/picks",{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({player, picks:local[player], tiebreak:localTB[player], code:editCode})});
     if(r.status===401){ const code=prompt("Edit passphrase required to save:"); if(code){ editCode=code; localStorage.setItem("wc_edit",code); return savePicks(player); } chip("locked","err"); return; }
+    if(r.status===423){ const j=await r.json().catch(()=>null); if(j&&j.state){ S=j.state; local.andrew=clone(S.picks.andrew); local.sam=clone(S.picks.sam); } chip("locked","err"); render(); toast(nameOf(player)+"'s bracket is locked — unlock to edit"); return; }
     if(!r.ok){ chip("error","err"); return; }
     S=await r.json(); local.andrew=clone(S.picks.andrew); local.sam=clone(S.picks.sam);
     localTB.andrew=S.tiebreak.andrew; localTB.sam=S.tiebreak.sam;
@@ -241,7 +350,7 @@ function gradeMark(correct){ return correct?"✓":"✗"; }
 function teamRow(player,id,team,picked,decided,actual){
   const div=document.createElement("div");
   let cls="team"; if(!team) cls+=" empty";
-  const clickable = team && !decided && feedersKnown(player,id);
+  const clickable = team && !isLocked(player) && feedersKnown(player,id);
   if(clickable) cls+=" clickable";
   if(picked) cls+=" pick-"+player;
   if(team && !picked && !decided && feedersKnown(player,id)) {} // normal
@@ -289,7 +398,7 @@ function buildMatch(id){
   }
 
   const player=mode,[a,b]=feeders(player,id),win=local[player][id]||null;
-  if(!feedersKnown(player,id) || decided) wrap.classList.add(decided?"":"locked");
+  if(!feedersKnown(player,id)) wrap.classList.add("locked");
   wrap.appendChild(teamRow(player,id,a, win===a&&a, decided, actual));
   wrap.appendChild(teamRow(player,id,b, win===b&&b, decided, actual));
   if(decided && win && win!==actual){
@@ -303,17 +412,29 @@ function renderScore(){
   const sb=document.getElementById("scoreboard"); if(!S){sb.innerHTML="";return;}
   const a=S.scores.andrew, s=S.scores.sam;
   const lead = a.points===s.points?0:(a.points>s.points?1:2);
+  const elim=eliminatedTeams();
+  const ceil={andrew:ceilingFor("andrew",elim), sam:ceilingFor("sam",elim)};
   function card(player,sc,who){
     const lead2 = (player==="andrew"&&lead===1)||(player==="sam"&&lead===2);
     const tb = S.tiebreak ? S.tiebreak[player] : null;
+    const mx = ceil[player];
+    const ceilLine = (S.decided<31 && mx>sc.points) ? `<div class="ceil">ceiling <b>${mx}</b></div>` : "";
     return `<div class="scard ${player} ${lead2?'lead':''}">
       <div class="crown">${lead2?'👑':''}</div>
       <div class="lab">${who}</div><div class="pts">${sc.points}</div>
       <div class="sub">${sc.correct} correct</div>
-      <div class="tb">${tb!=null?('final: '+tb+' goals'):''}</div></div>`;
+      ${ceilLine}
+      <div class="tb">${tb!=null?('final: '+tb+' goals'):''}</div>
+      <div class="lockchip">${isLocked(player)?'🔒 locked in':''}</div></div>`;
+  }
+  // A player clinches when their banked points already exceed the other's ceiling.
+  let clinch="";
+  if(!S.pool){
+    if(a.points>ceil.sam) clinch=`<span class="clinch">🏆 Andrew has clinched it</span>`;
+    else if(s.points>ceil.andrew) clinch=`<span class="clinch">🏆 Sam has clinched it</span>`;
   }
   sb.innerHTML = card("andrew",a,"Andrew") +
-    `<div class="decided">${S.decided} of 31<br>matches decided</div>` +
+    `<div class="decided">${S.decided} of 31<br>matches decided${clinch}</div>` +
     card("sam",s,"Sam");
 }
 function nameOf(p){ return p==="andrew"?"Andrew":"Sam"; }
@@ -331,7 +452,7 @@ function renderTiebreak(){
   const inp=document.createElement("input");
   inp.type="number"; inp.min="0"; inp.max="40"; inp.placeholder="?";
   inp.value = localTB[mode]==null?"":localTB[mode];
-  if(decided) inp.disabled=true;
+  if(decided||isLocked(mode)) inp.disabled=true;
   inp.onchange=()=>{ const n=inp.value===""?null:Math.max(0,Math.min(40,parseInt(inp.value,10)||0)); localTB[mode]=n; savePicks(mode); };
   box.appendChild(inp);
   if(decided && S.finalGoals!=null){ const s=document.createElement("span"); s.textContent="actual: "+S.finalGoals; s.style.color="var(--gold)"; box.appendChild(s); }
@@ -349,6 +470,138 @@ function renderPool(){
   }
   host.innerHTML=`<div class="poolbanner"><div class="big">${big}</div><div class="small">${small}</div></div>`;
 }
+function renderLock(){
+  const box=document.getElementById("lockBox");
+  if(!S||mode==="compare"){ box.innerHTML=""; return; }
+  if(isLocked(mode)){
+    const ts=S.locked[mode];
+    const when=ts?new Date(ts).toLocaleDateString(undefined,{month:"short",day:"numeric"}):"";
+    box.innerHTML=`<span class="lockstate">🔒 <b>Locked in</b>${when?" · "+when:""}</span><button class="lockbtn unlock" id="lockToggle">Unlock</button>`;
+  }else{
+    box.innerHTML=`<button class="lockbtn lock" id="lockToggle">🔒 Lock in ${nameOf(mode)}'s bracket</button>`;
+  }
+  const t=document.getElementById("lockToggle"); if(t) t.onclick=()=>doLock(mode,!isLocked(mode));
+}
+async function doLock(player,lock){
+  if(lock){
+    const n=ALL.filter(id=>local[player][id]).length;
+    const msg=n<31
+      ? `${nameOf(player)} has picked ${n} of 31 matches. Lock in anyway? You can unlock later if you need to.`
+      : `Lock in ${nameOf(player)}'s bracket? Picks freeze for the tournament — you can still unlock later if you need to.`;
+    if(!confirm(msg)) return;
+  }else{
+    if(!confirm(`Unlock ${nameOf(player)}'s bracket so it can be edited again?`)) return;
+  }
+  try{
+    const r=await fetch("/api/lock",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({player,locked:lock,code:editCode})});
+    if(r.status===401){ const code=prompt("Edit passphrase required:"); if(code){editCode=code;localStorage.setItem("wc_edit",code);return doLock(player,lock);} return; }
+    if(!r.ok){ toast("Couldn't update lock"); return; }
+    S=await r.json(); local.andrew=clone(S.picks.andrew); local.sam=clone(S.picks.sam); render();
+    toast(lock?nameOf(player)+"'s bracket locked in 🔒":nameOf(player)+"'s bracket unlocked");
+  }catch(e){ toast("Offline — try again"); }
+}
+
+function renderChamp(){
+  const host=document.getElementById("champ");
+  const a=S.picks.andrew[CHAMP]||null, s=S.picks.sam[CHAMP]||null, act=S.actuals[CHAMP]||null;
+  if(!a&&!s&&!act){ host.innerHTML=""; return; }
+  function cell(cls,lab,team,showHit){
+    const inner = team
+      ? `<div class="pk"><span class="fl">${T[team].f}</span>${T[team].n}</div>`
+      : `<div class="pk tbd">No champion picked yet</div>`;
+    let hit="";
+    if(showHit&&act&&team) hit=`<div class="hit ${team===act?'y':'n'}">${team===act?'called it ✓':'eliminated ✗'}</div>`;
+    return `<div class="cc ${cls}"><div class="lab">${lab}</div>${inner}${hit}</div>`;
+  }
+  let html=cell("andrew","Andrew's champion",a,true)+cell("sam","Sam's champion",s,true);
+  if(act) html=cell("actual","🏆 Champion",act,false)+html;
+  host.innerHTML=html;
+}
+
+function goldenCalled(p){
+  const gp=S.goldenPick&&S.goldenPick[p], gw=S.goldenWinner;
+  if(!gp||!gw) return false;
+  const x=gp.name.toLowerCase().trim(), y=gw.toLowerCase().trim();
+  return x===y||y.includes(x)||x.includes(y);
+}
+function renderGolden(){
+  const host=document.getElementById("goldenPanel");
+  if(!goldenOpen){ host.innerHTML=""; return; }
+  const gw=S.goldenWinner||null;
+  function pcell(p){
+    const gp=S.goldenPick&&S.goldenPick[p]||null, lockd=isLocked(p), editable=(mode===p&&!lockd);
+    let val;
+    if(editable){
+      val=`<input id="gName_${p}" placeholder="Predict the top scorer…" maxlength="40" value="${escapeHtml(gp?gp.name:"")}">`;
+    }else{
+      val = gp
+        ? `<span class="val">${gp.team?T[gp.team].f+" ":""}${escapeHtml(gp.name)}${gw?`<span class="hit ${goldenCalled(p)?'y':''}">${goldenCalled(p)?'✓':'✗'}</span>`:""}</span>`
+        : `<span class="val tbd">No pick yet</span>`;
+    }
+    return `<div class="gp ${p}"><div class="lab">${nameOf(p)}${lockd?' 🔒':''}</div>${val}</div>`;
+  }
+  let board;
+  if(S.goldenBoard&&S.goldenBoard.length){
+    board=`<ol>`+S.goldenBoard.map((x,i)=>`<li><span class="rk">${i+1}</span><span class="gn">${x.team?T[x.team].f+" ":""}${escapeHtml(x.name)}</span><span class="gg">${x.goals}⚽</span></li>`).join("")+`</ol>`;
+  }else{
+    board=`<div class="empty">No scorers entered yet — add the tournament's top 5 in the Results panel.</div>`;
+  }
+  host.innerHTML=`<div class="golden"><h3>⚽ Golden Boot${gw?` — winner: ${escapeHtml(gw)}`:""}</h3>
+    <div class="picks">${pcell("andrew")}${pcell("sam")}</div>
+    <div class="board"><div class="bt">Top scorers — live</div>${board}</div></div>`;
+  ["andrew","sam"].forEach(p=>{ const el=document.getElementById("gName_"+p); if(el) el.onchange=()=>setGolden(p,el.value); });
+}
+async function setGolden(player,name){
+  try{
+    const r=await fetch("/api/golden",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({player,name,code:editCode})});
+    if(r.status===401){ const code=prompt("Edit passphrase required:"); if(code){editCode=code;localStorage.setItem("wc_edit",code);return setGolden(player,name);} return; }
+    if(r.status===423){ toast(nameOf(player)+"'s bracket is locked"); return; }
+    if(!r.ok){ toast("Couldn't save pick"); return; }
+    S=await r.json(); renderGolden(); chip("saved ✓","ok");
+  }catch(e){ toast("Offline — try again"); }
+}
+
+function renderH2H(){
+  const host=document.getElementById("h2h");
+  if(mode!=="compare"){ host.innerHTML=""; return; }
+  const w=S.weights, AP=S.picks.andrew, SP=S.picks.sam, AC=S.actuals;
+  // --- per-round table ---
+  const rp=[[0,0,0,0,0],[0,0,0,0,0]], rdec=[0,0,0,0,0];
+  for(const id of ALL){ const r=roundOf[id], act=AC[id]; if(!act) continue; rdec[r]++;
+    if(AP[id]===act) rp[0][r]+=w[r]; if(SP[id]===act) rp[1][r]+=w[r]; }
+  let rows="";
+  for(let r=0;r<COLS.length;r++){
+    const a=rp[0][r], s=rp[1][r], cls=(rdec[r]&&a!==s)?(a>s?"win-a":"win-s"):"";
+    rows+=`<tr class="${cls}"><td class="rd">${BR.ROUND_SHORT[r]}</td><td class="a">${a}</td><td class="s">${s}</td><td>${rdec[r]}/${COLS[r].length}</td></tr>`;
+  }
+  const ta=S.scores.andrew.points, ts=S.scores.sam.points;
+  rows+=`<tr class="tot ${ta!==ts?(ta>ts?'win-a':'win-s'):''}"><td class="rd">Total</td><td class="a">${ta}</td><td class="s">${ts}</td><td>${S.decided}/31</td></tr>`;
+  const elim=eliminatedTeams();
+  rows+=`<tr class="ceil"><td class="rd">Ceiling</td><td class="a">${ceilingFor("andrew",elim)}</td><td class="s">${ceilingFor("sam",elim)}</td><td>max</td></tr>`;
+  const perRound=`<div class="panel"><h4>By round</h4><table><thead><tr><th>Round</th><th>Andrew</th><th>Sam</th><th>Done</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  // --- swing games: undecided, both picked, differ ---
+  const swing=[];
+  for(const id of ALL){ if(AC[id]) continue; const a=AP[id], s=SP[id]; if(a&&s&&a!==s) swing.push({r:roundOf[id],a,s,pts:w[roundOf[id]]}); }
+  swing.sort((x,y)=>y.pts-x.pts||x.r-y.r);
+  let swingHtml;
+  if(swing.length){
+    swingHtml=`<ul class="swing">`+swing.slice(0,8).map(g=>`<li><span class="rb">${BR.ROUND_SHORT[g.r]}</span><span class="vs"><span class="pa">${T[g.a].f} ${T[g.a].n}</span><span class="ps">${T[g.s].f} ${T[g.s].n}</span></span><span class="pts">${g.pts}</span></li>`).join("")+`</ul>`;
+    if(swing.length>8) swingHtml+=`<div class="none">+${swing.length-8} more split picks…</div>`;
+  }else swingHtml=`<div class="none">No head-to-head splits yet — fill both brackets to see where you disagree.</div>`;
+  const swingPanel=`<div class="panel"><h4>Swing games · ${swing.length}</h4>${swingHtml}</div>`;
+  // --- results feed: decided, most-advanced round first ---
+  const dec=ALL.filter(id=>AC[id]).sort((x,y)=>roundOf[y]-roundOf[x]||ALL.indexOf(x)-ALL.indexOf(y));
+  let feedHtml;
+  if(dec.length){
+    const tag=(cls,pk,act)=>`<span class="tag ${cls} ${pk===act?'':'miss'}">${cls==='a'?'A':'S'} ${pk?(pk===act?'✓':'✗'):'—'}</span>`;
+    feedHtml=`<ul class="feed">`+dec.map(id=>{ const act=AC[id];
+      return `<li><span class="rb">${BR.ROUND_SHORT[roundOf[id]]}</span><span class="res">${T[act].f} <b>${T[act].n}</b> advanced</span><span class="who2">${tag('a',AP[id],act)}${tag('s',SP[id],act)}</span></li>`;
+    }).join("")+`</ul>`;
+  }else feedHtml=`<div class="none">No games decided yet.</div>`;
+  const feedPanel=`<div class="panel wide"><h4>Results so far · ${dec.length}</h4>${feedHtml}</div>`;
+  host.innerHTML=`<div class="h2h">${perRound}${swingPanel}${feedPanel}</div>`;
+}
+
 function showIdentity(){
   const ov=document.getElementById("idOverlay");
   ov.innerHTML=`<div class="idov"><div class="card">
@@ -370,9 +623,13 @@ function render(){
   renderGreet();
   renderPool();
   renderTiebreak();
+  renderLock();
+  renderChamp();
+  renderGolden();
+  renderH2H();
   document.querySelectorAll("#seg button").forEach(b=>b.classList.toggle("active",b.dataset.player===mode));
   const cmp=mode==="compare";
-  document.getElementById("clearBtn").style.display=cmp?"none":"";
+  document.getElementById("clearBtn").style.display=(cmp||isLocked(mode))?"none":"";
   if(cmp){
     const both=ALL.filter(id=>S.picks.andrew[id]&&S.picks.sam[id]);
     const same=both.filter(id=>S.picks.andrew[id]===S.picks.sam[id]).length;
@@ -429,6 +686,15 @@ function renderAdmin(){
   html+=`<div style="margin-bottom:8px"><button class="abtn" onclick="refreshResults()">Refresh from ESPN now</button></div>`;
   const fg = S.finalGoals==null?"":S.finalGoals;
   html+=`<div class="fg"><span>Final total goals (settles a tie):</span><input id="fgInput" type="number" min="0" value="${fg}"><button class="abtn" onclick="saveFinalGoals(false)">Save</button>${S.finalGoals!=null?'<span class="clr" onclick="saveFinalGoals(true)">clear</span>':''}</div>`;
+  // Golden Boot board + winner
+  html+=`<div class="fg" style="display:block"><span>⚽ Golden Boot — top 5 scorers &amp; winner:</span>`;
+  for(let i=0;i<5;i++){ const b=(S.goldenBoard&&S.goldenBoard[i])||{};
+    html+=`<div style="display:flex;gap:6px;margin-top:5px;align-items:center"><span style="width:14px;color:var(--gold);font-weight:800">${i+1}</span>`+
+      `<input id="gbn_${i}" placeholder="Scorer name" value="${escapeHtml(b.name||"")}" style="flex:1;min-width:110px">`+
+      `<input id="gbt_${i}" placeholder="TEAM" maxlength="3" value="${escapeHtml(b.team||"")}" style="width:64px;text-transform:uppercase">`+
+      `<input id="gbg_${i}" type="number" min="0" placeholder="G" value="${b.goals!=null?b.goals:""}" style="width:54px"></div>`;
+  }
+  html+=`<div style="display:flex;gap:6px;margin-top:8px;align-items:center;flex-wrap:wrap"><span>Winner:</span><input id="gbw" placeholder="Golden Boot winner name" value="${escapeHtml(S.goldenWinner||"")}" style="flex:1;min-width:120px"><button class="abtn" onclick="saveGolden()">Save Golden Boot</button></div></div>`;
   const actuals=S.actuals;
   for(const id of ALL){
     const [a,b]=realParticipants(id,actuals);
@@ -451,6 +717,19 @@ async function setActual(matchId,winner){
   if(!r.ok){ toast("Couldn't save result"); return; }
   S=await r.json(); local.andrew=clone(S.picks.andrew); local.sam=clone(S.picks.sam); render(); toast("Result saved");
 }
+async function saveGolden(){
+  const board=[];
+  for(let i=0;i<5;i++){
+    const n=document.getElementById("gbn_"+i).value.trim();
+    if(!n) continue;
+    board.push({name:n, team:document.getElementById("gbt_"+i).value.trim(), goals:document.getElementById("gbg_"+i).value});
+  }
+  const winner=document.getElementById("gbw").value.trim();
+  const r=await fetch("/api/admin/golden",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({board,winner,code:adminCode})});
+  if(r.status===401){ toast("Wrong admin passphrase"); return; }
+  if(!r.ok){ toast("Couldn't save Golden Boot"); return; }
+  S=await r.json(); render(); toast("Golden Boot saved");
+}
 async function refreshResults(){
   toast("Checking ESPN…");
   const r=await fetch("/api/admin/refresh",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code:adminCode})});
@@ -467,16 +746,16 @@ ROUND_LABELS.forEach((lbl,i)=>{const b=document.createElement("button");b.textCo
   rtabs.appendChild(b);});
 document.getElementById("seg").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;mode=b.dataset.player;render();});
 document.getElementById("adminBtn").onclick=()=>{adminOpen=!adminOpen;renderAdmin();};
+document.getElementById("goldenBtn").onclick=()=>{goldenOpen=!goldenOpen;renderGolden();};
 document.getElementById("shareBtn").onclick=()=>{
   const url=location.href;
   if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(()=>toast("Link copied — send it to Sam")).catch(()=>toast(url));
   else toast(url);
 };
 document.getElementById("clearBtn").onclick=()=>{
-  if(mode==="compare")return;
-  // keep decided matches; clear only undecided picks
-  const keep={}; for(const id of ALL){ if(S.actuals[id]&&local[mode][id]) keep[id]=local[mode][id]; }
-  local[mode]=keep; render(); savePicks(mode); toast((mode==="andrew"?"Andrew":"Sam")+"'s open picks cleared");
+  if(mode==="compare"||isLocked(mode))return;
+  if(!confirm("Clear all of "+nameOf(mode)+"'s picks?")) return;
+  local[mode]={}; render(); savePicks(mode); toast(nameOf(mode)+"'s picks cleared");
 };
 window.addEventListener("resize",()=>requestAnimationFrame(layoutLinks));
 if(window.ResizeObserver) new ResizeObserver(()=>requestAnimationFrame(layoutLinks)).observe(bracket);

@@ -19,7 +19,7 @@ const ALL = BR.COLS.flat();
 const VALID_TEAMS = new Set(Object.keys(BR.T));
 
 // ---- persistence (atomic JSON file) ----
-let state = { picks: { andrew: {}, sam: {} }, manualActuals: {}, tiebreak: { andrew: null, sam: null }, finalGoals: null, updatedAt: 0 };
+let state = { picks: { andrew: {}, sam: {} }, manualActuals: {}, tiebreak: { andrew: null, sam: null }, finalGoals: null, locked: { andrew: null, sam: null }, goldenPick: { andrew: null, sam: null }, goldenBoard: [], goldenWinner: null, updatedAt: 0 };
 function load() {
   try {
     const j = JSON.parse(fs.readFileSync(DATA_FILE, "utf8"));
@@ -31,6 +31,10 @@ function load() {
   state.manualActuals = state.manualActuals || {};
   state.tiebreak = state.tiebreak || { andrew: null, sam: null };
   if (state.finalGoals === undefined) state.finalGoals = null;
+  state.locked = state.locked || { andrew: null, sam: null };
+  state.goldenPick = state.goldenPick || { andrew: null, sam: null };
+  state.goldenBoard = Array.isArray(state.goldenBoard) ? state.goldenBoard : [];
+  if (state.goldenWinner === undefined) state.goldenWinner = null;
 }
 function save() {
   state.updatedAt = Date.now();
@@ -208,6 +212,10 @@ function publicState() {
     scores,
     tiebreak: state.tiebreak,
     finalGoals: state.finalGoals,
+    locked: state.locked,
+    goldenPick: state.goldenPick,
+    goldenBoard: state.goldenBoard,
+    goldenWinner: state.goldenWinner,
     pool: poolResult(actuals, scores),
     weights: BR.ROUND_WEIGHTS,
     decided: Object.keys(actuals).length,
@@ -227,20 +235,39 @@ app.post("/api/picks", (req, res) => {
   const { player, picks, code, tiebreak } = req.body || {};
   if (player !== "andrew" && player !== "sam") return res.status(400).json({ error: "bad player" });
   if (EDIT_CODE && code !== EDIT_CODE) return res.status(401).json({ error: "bad code" });
+  // Once a player locks in their bracket, it's frozen until they unlock it.
+  if (state.locked[player]) return res.status(423).json({ error: "locked", state: publicState() });
   if (tiebreak !== undefined) {
     const n = parseInt(tiebreak, 10);
     state.tiebreak[player] = (tiebreak === null || isNaN(n)) ? null : Math.max(0, Math.min(40, n));
   }
-  const actuals = computeActuals();
-  const incoming = normalizePicks(picks || {});
-  // Lock: never change a pick for a match that's already decided.
-  const merged = {};
-  for (const id of ALL) {
-    if (actuals[id]) merged[id] = state.picks[player][id] || incoming[id] || undefined;
-    else if (incoming[id]) merged[id] = incoming[id];
-  }
-  Object.keys(merged).forEach(k => merged[k] === undefined && delete merged[k]);
-  state.picks[player] = normalizePicks(merged);
+  // No per-match lock: every match (including already-decided ones) is pickable
+  // until the player explicitly locks in. normalizePicks keeps the tree consistent.
+  state.picks[player] = normalizePicks(picks || {});
+  save();
+  res.json(publicState());
+});
+
+// Lock / unlock a player's whole bracket. Easy unlock (no admin code) by design.
+app.post("/api/lock", (req, res) => {
+  const { player, locked, code } = req.body || {};
+  if (player !== "andrew" && player !== "sam") return res.status(400).json({ error: "bad player" });
+  if (EDIT_CODE && code !== EDIT_CODE) return res.status(401).json({ error: "bad code" });
+  state.locked[player] = locked ? (state.locked[player] || Date.now()) : null;
+  save();
+  res.json(publicState());
+});
+
+// A player's Golden Boot prediction (top scorer of the tournament).
+app.post("/api/golden", (req, res) => {
+  const { player, name, team, code } = req.body || {};
+  if (player !== "andrew" && player !== "sam") return res.status(400).json({ error: "bad player" });
+  if (EDIT_CODE && code !== EDIT_CODE) return res.status(401).json({ error: "bad code" });
+  if (state.locked[player]) return res.status(423).json({ error: "locked", state: publicState() });
+  const nm = (name || "").toString().trim().slice(0, 40);
+  let tm = (team || "").toString().trim().toUpperCase();
+  if (!VALID_TEAMS.has(tm)) tm = "";
+  state.goldenPick[player] = nm ? { name: nm, team: tm || null } : null;
   save();
   res.json(publicState());
 });
@@ -263,6 +290,27 @@ app.post("/api/admin/refresh", async (req, res) => {
   const { code } = req.body || {};
   if (ADMIN_CODE && code !== ADMIN_CODE) return res.status(401).json({ error: "bad code" });
   await poll();
+  res.json(publicState());
+});
+
+app.post("/api/admin/golden", (req, res) => {
+  const { board, winner, code } = req.body || {};
+  if (ADMIN_CODE && code !== ADMIN_CODE) return res.status(401).json({ error: "bad code" });
+  if (Array.isArray(board)) {
+    state.goldenBoard = board.slice(0, 5).map(x => {
+      let tm = (x.team || "").toString().trim().toUpperCase();
+      if (!VALID_TEAMS.has(tm)) tm = "";
+      return {
+        name: (x.name || "").toString().trim().slice(0, 40),
+        team: tm || null,
+        goals: Math.max(0, Math.min(99, parseInt(x.goals, 10) || 0))
+      };
+    }).filter(x => x.name);
+  }
+  if (winner !== undefined) {
+    state.goldenWinner = (winner === null || winner === "") ? null : winner.toString().trim().slice(0, 40);
+  }
+  save();
   res.json(publicState());
 });
 
