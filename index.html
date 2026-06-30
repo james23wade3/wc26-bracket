@@ -151,6 +151,10 @@
   .lockstate{font-size:11.5px;color:rgba(246,244,236,.7)}
   .lockstate b{color:var(--gold)}
   .scard .lockchip{font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-top:3px}
+  .scard .ceil{font-size:10px;color:rgba(246,244,236,.55);margin-top:2px}
+  .scard .ceil b{color:var(--gold);font-weight:800}
+  .decided .clinch{display:block;margin-top:5px;color:var(--gold);font-weight:800;font-size:11.5px}
+  .h2h tr.ceil td{color:rgba(246,244,236,.6)} .h2h tr.ceil td.a,.h2h tr.ceil td.s{color:var(--gold);font-weight:800}
 
   /* champion spotlight */
   .champ{display:flex;gap:10px;justify-content:center;align-items:stretch;flex-wrap:wrap;margin:14px auto 0;max-width:700px}
@@ -287,6 +291,24 @@ let adminOpen=false;
 let goldenOpen=false;
 const clone=o=>JSON.parse(JSON.stringify(o||{}));
 const isLocked=p=>!!(S&&S.locked&&S.locked[p]);
+// Teams knocked out in reality (lost a decided match they really played in).
+function eliminatedTeams(){
+  const elim=new Set();
+  for(const id of ALL){ const w=S.actuals[id]; if(!w) continue;
+    const [x,y]=realParticipants(id,S.actuals);
+    if(x&&x!==w) elim.add(x); if(y&&y!==w) elim.add(y); }
+  return elim;
+}
+// Best score a player can still finish on: points banked + every undecided
+// match whose picked team is still alive (a fixed bracket means an alive pick
+// is still on a path that can win that match).
+function ceilingFor(player,elim){
+  elim=elim||eliminatedTeams();
+  let m=S.scores[player].points;
+  for(const id of ALL){ if(S.actuals[id]) continue;
+    const p=S.picks[player][id]; if(p&&!elim.has(p)) m+=S.weights[roundOf[id]]; }
+  return m;
+}
 function escapeHtml(s){ return String(s==null?"":s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 // ---------- data ----------
@@ -390,18 +412,29 @@ function renderScore(){
   const sb=document.getElementById("scoreboard"); if(!S){sb.innerHTML="";return;}
   const a=S.scores.andrew, s=S.scores.sam;
   const lead = a.points===s.points?0:(a.points>s.points?1:2);
+  const elim=eliminatedTeams();
+  const ceil={andrew:ceilingFor("andrew",elim), sam:ceilingFor("sam",elim)};
   function card(player,sc,who){
     const lead2 = (player==="andrew"&&lead===1)||(player==="sam"&&lead===2);
     const tb = S.tiebreak ? S.tiebreak[player] : null;
+    const mx = ceil[player];
+    const ceilLine = (S.decided<31 && mx>sc.points) ? `<div class="ceil">ceiling <b>${mx}</b></div>` : "";
     return `<div class="scard ${player} ${lead2?'lead':''}">
       <div class="crown">${lead2?'👑':''}</div>
       <div class="lab">${who}</div><div class="pts">${sc.points}</div>
       <div class="sub">${sc.correct} correct</div>
+      ${ceilLine}
       <div class="tb">${tb!=null?('final: '+tb+' goals'):''}</div>
       <div class="lockchip">${isLocked(player)?'🔒 locked in':''}</div></div>`;
   }
+  // A player clinches when their banked points already exceed the other's ceiling.
+  let clinch="";
+  if(!S.pool){
+    if(a.points>ceil.sam) clinch=`<span class="clinch">🏆 Andrew has clinched it</span>`;
+    else if(s.points>ceil.andrew) clinch=`<span class="clinch">🏆 Sam has clinched it</span>`;
+  }
   sb.innerHTML = card("andrew",a,"Andrew") +
-    `<div class="decided">${S.decided} of 31<br>matches decided</div>` +
+    `<div class="decided">${S.decided} of 31<br>matches decided${clinch}</div>` +
     card("sam",s,"Sam");
 }
 function nameOf(p){ return p==="andrew"?"Andrew":"Sam"; }
@@ -543,6 +576,8 @@ function renderH2H(){
   }
   const ta=S.scores.andrew.points, ts=S.scores.sam.points;
   rows+=`<tr class="tot ${ta!==ts?(ta>ts?'win-a':'win-s'):''}"><td class="rd">Total</td><td class="a">${ta}</td><td class="s">${ts}</td><td>${S.decided}/31</td></tr>`;
+  const elim=eliminatedTeams();
+  rows+=`<tr class="ceil"><td class="rd">Ceiling</td><td class="a">${ceilingFor("andrew",elim)}</td><td class="s">${ceilingFor("sam",elim)}</td><td>max</td></tr>`;
   const perRound=`<div class="panel"><h4>By round</h4><table><thead><tr><th>Round</th><th>Andrew</th><th>Sam</th><th>Done</th></tr></thead><tbody>${rows}</tbody></table></div>`;
   // --- swing games: undecided, both picked, differ ---
   const swing=[];
