@@ -1,0 +1,9 @@
+{
+  "name": "wc26-bracket",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Road to MetLife — shared World Cup 2026 knockout bracket with live scoring",
+  "engines": { "node": ">=18" },
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "express": "^4.19.2" }
+}
